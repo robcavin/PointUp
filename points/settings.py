@@ -16,6 +16,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 FACEBOOK_APP_ID = '630834406963966'
 FACEBOOK_APP_SECRET = '169e943f0c5b9f670c6a92cd013152f8'
+FACEBOOK_DEFAULT_SCOPE = ['basic_info','email']
+FACEBOOK_STORE_LIKES = True
+FACEBOOK_STORE_FRIENDS = True
+FACEBOOK_CELERY_STORE = True
+FACEBOOK_CELERY_TOKEN_EXTEND = True
+FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.FacebookRegistrationBackend'
 
 # Celery stuff
 BROKER_URL = 'redis://pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
@@ -68,7 +74,7 @@ AUTHENTICATION_BACKENDS = (
 AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
 
 TEMPLATE_DIRS = (
-    'points/../templates/',
+    'templates/',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",

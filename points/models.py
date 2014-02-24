@@ -1,5 +1,5 @@
 from django.db import models
+from django_facebook.models import FacebookCustomUser
 
-class Person(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+class User(FacebookCustomUser):
+    points = models.IntegerField(default=100)

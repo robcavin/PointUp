@@ -78,7 +78,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'points.models.User'
+AUTH_USER_MODEL = 'points.CustomUser'
 
 TEMPLATE_DIRS = (
     'templates/',

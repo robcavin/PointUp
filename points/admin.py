@@ -1,4 +1,4 @@
 from django.contrib import admin
-from django_facebook.models import FacebookCustomUser
+from points.models import CustomUser
 
-admin.site.register(FacebookCustomUser,admin.ModelAdmin)
+admin.site.register(CustomUser,admin.ModelAdmin)

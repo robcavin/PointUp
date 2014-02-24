@@ -23,6 +23,8 @@ FACEBOOK_CELERY_STORE = True
 FACEBOOK_CELERY_TOKEN_EXTEND = True
 FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.FacebookRegistrationBackend'
 
+FACEBOOK_CANVAS_PAGE='https://apps.facebook.com/goodpointstest'
+
 # Celery stuff
 BROKER_URL = 'redis://app22463601:jyS5FKra9PWXrYRh@pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.

@@ -28,6 +28,7 @@ FACEBOOK_CANVAS_PAGE='https://apps.facebook.com/goodpointstest'
 # Celery stuff
 BROKER_URL = 'redis://app22463601:jyS5FKra9PWXrYRh@pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
+CELERY_REDIS_MAX_CONNECTIONS = 10
 
 RAVEN_CONFIG = {
     'dsn': 'https://237a31ed8b584f3abe8bab642f753e55:08f3ee7540c948819e8aa52344eb58b1@app.getsentry.com/19927',

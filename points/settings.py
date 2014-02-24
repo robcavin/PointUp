@@ -29,6 +29,10 @@ FACEBOOK_CANVAS_PAGE='https://apps.facebook.com/goodpointstest'
 BROKER_URL = 'redis://app22463601:jyS5FKra9PWXrYRh@pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
 
+RAVEN_CONFIG = {
+    'dsn': 'https://237a31ed8b584f3abe8bab642f753e55:08f3ee7540c948819e8aa52344eb58b1@app.getsentry.com/19927',
+}
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -55,7 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_facebook',
-    'points'
+    'points',
+    'raven.contrib.django.raven_compat',
 )
 
 MIDDLEWARE_CLASSES = (

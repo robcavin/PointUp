@@ -21,7 +21,7 @@ FACEBOOK_STORE_LIKES = True
 FACEBOOK_STORE_FRIENDS = True
 FACEBOOK_CELERY_STORE = True
 FACEBOOK_CELERY_TOKEN_EXTEND = True
-FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.FacebookRegistrationBackend'
+#FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.FacebookRegistrationBackend'
 
 FACEBOOK_CANVAS_PAGE='https://apps.facebook.com/goodpointstest'
 

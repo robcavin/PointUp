@@ -78,7 +78,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
+AUTH_USER_MODEL = 'points.models.User'
 
 TEMPLATE_DIRS = (
     'templates/',

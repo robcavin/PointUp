@@ -15,7 +15,11 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 FACEBOOK_APP_ID = '630834406963966'
-FACEBOOK_SECRET_KEY = '169e943f0c5b9f670c6a92cd013152f8'
+FACEBOOK_APP_SECRET = '169e943f0c5b9f670c6a92cd013152f8'
+
+# Celery stuff
+BROKER_URL = 'redis://pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -25,30 +29,13 @@ SECRET_KEY = 'q7@jh=--=e#713^mns_q#n@#x2%155eu059)43szphhlaex%2#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 TEMPLATE_DEBUG = True
-
-# Parse database configuration from $DATABASE_URL
-DATABASES = {
-    'default' : dj_database_url.config()
-}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
-
-# Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
 
 # Application definition
 
@@ -60,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_facebook',
+    'points'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,10 +65,10 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
+AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
 
 TEMPLATE_DIRS = (
-    'points/templates/',
+    'points/../templates/',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
@@ -101,16 +89,10 @@ WSGI_APPLICATION = 'points.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'point',
-#        'USER': '',
-#        'PASSWORD': '',
-#        'HOST': ''
-#    }
-#}
+# Parse database configuration from $DATABASE_URL
+DATABASES = {
+    'default' : dj_database_url.config()
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -130,3 +112,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 #STATIC_URL = '/static/'
+# Static asset configuration
+STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+if os.path.isfile(os.path.join(BASE_DIR, 'LOCAL')) :
+    from settings_local import *

@@ -1,0 +1,2 @@
+web: gunicorn points.wsgi --workers=2
+celery: celery --app=points worker --concurrency=2 -l info

@@ -16,18 +16,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 FACEBOOK_APP_ID = '630834406963966'
 FACEBOOK_APP_SECRET = '169e943f0c5b9f670c6a92cd013152f8'
-FACEBOOK_DEFAULT_SCOPE = ['basic_info','email']
+FACEBOOK_DEFAULT_SCOPE = ['basic_info', 'email']
 FACEBOOK_STORE_LIKES = True
 FACEBOOK_STORE_FRIENDS = True
 FACEBOOK_CELERY_STORE = True
 FACEBOOK_CELERY_TOKEN_EXTEND = True
 #FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.FacebookRegistrationBackend'
 
-FACEBOOK_CANVAS_PAGE='https://apps.facebook.com/goodpointstest'
+FACEBOOK_CANVAS_PAGE = 'https://apps.facebook.com/goodpointstest'
 
 # Celery stuff
 BROKER_URL = 'redis://app22463601:jyS5FKra9PWXrYRh@pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600, 'max_connections': 5}  # 1 hour.  # TODO - Remove Redis connection limit
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600,
+                            'max_connections': 5}  # 1 hour.  # TODO - Remove Redis connection limit
 
 RAVEN_CONFIG = {
     'dsn': 'https://237a31ed8b584f3abe8bab642f753e55:08f3ee7540c948819e8aa52344eb58b1@app.getsentry.com/19927',
@@ -59,9 +60,25 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_facebook',
-    'points',
+    'rest_framework',
     'raven.contrib.django.raven_compat',
+    'points',
 )
+
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+
+    'PAGINATE_BY': 10
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,7 +121,7 @@ WSGI_APPLICATION = 'points.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 # Parse database configuration from $DATABASE_URL
 DATABASES = {
-    'default' : dj_database_url.config()
+    'default': dj_database_url.config()
 }
 
 # Internationalization
@@ -132,5 +149,5 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-if os.path.isfile(os.path.join(BASE_DIR, 'LOCAL')) :
+if os.path.isfile(os.path.join(BASE_DIR, 'LOCAL')):
     from settings_local import *

@@ -1,5 +1,96 @@
-{%  extends "base.html" %}
+{% extends "base.html" %}
+
+{% block extrastyle %}
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+    <style>
+        html {
+            width: 760px;
+            height: 100%;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 100;
+            color: #555555;
+            height: 100%;
+            margin: 0px;
+        }
+
+        #root {
+            height: 100%;
+        }
+
+        #points {
+            font-size: 150pt;
+            text-align: center;
+            margin: auto;
+        }
+
+        #user_table {
+            float: right;
+            overflow-y: auto;
+            width: auto;
+            height: 100%;
+        }
+
+        .friend_container {
+            background: #ffffff;
+            padding: 5px;
+            margin: 5px 20px 5px 0px;
+            width:222px;
+        }
+
+        .friend_cell {
+            border: 1px solid #555555;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .friend_cell .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+        }
+
+        .friend_cell h1 {
+            margin: 0;
+            font-size: 20pt;
+        }
+
+        .center {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+    </style>
+{% endblock %}
 
 {% block content %}
-    {{ request.user }}
-{%  endblock %}
+    <div id="root">
+        <div id="user_table">
+            {% for friend in request.user.friends %}
+                <div class="friend_container">
+                    <div class="friend_cell">
+                        <img class="avatar" src="http://graph.facebook.com/{{ friend.facebook_id }}/picture?type=square"/>
+
+                        <h1 class="username">{{ friend.name }}</h1>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="center">
+            <div id="points">
+                {{ request.user.points }}
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+
+    </div>
+{% endblock %}
+
+{% block extrascript %}
+    <script type="text/javascript">
+        var myObject = eval('({{ friends }})');
+    </script>
+{% endblock %}

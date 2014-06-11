@@ -1,21 +1,7 @@
 {% extends "base.html" %}
 
 {% block extrastyle %}
-    <link href='//fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
     <style>
-        html {
-            height: 100%;
-        }
-
-        body {
-            background-color: #f0f0f0;
-            font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: 100;
-            color: #555555;
-            height: 100%;
-            margin: 0px;
-        }
-
         #root {
             height: 100%;
         }
@@ -27,6 +13,7 @@
         }
 
         #user_table {
+            list-style: none;
             float: right;
             overflow-y: auto;
             width: auto;
@@ -37,7 +24,7 @@
             background: #ffffff;
             padding: 5px;
             margin: 5px 20px 5px 0px;
-            width:222px;
+            width: 222px;
         }
 
         .friend_cell {
@@ -46,15 +33,15 @@
             width: 200px;
         }
 
-        .friend_cell .avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 35px;
+        .friend_cell .friend_points {
+            font-size: 15pt;
+            margin: auto;
+            display: inline-block;
+            vertical-align: middle;
         }
 
-        .friend_cell h1 {
-            margin: 0;
-            font-size: 20pt;
+        .friend_cell .username {
+            font-size: 16pt;
         }
 
         .center {
@@ -67,20 +54,49 @@
 
 {% block content %}
     <div id="root">
-        <div id="user_table">
+        <ul id="user_table">
             {% for friend in request.user.friends %}
-                <div class="friend_container">
+                <li class="friend_container">
                     <div class="friend_cell">
-                        <img class="avatar" src="//graph.facebook.com/{{ friend.facebook_id }}/picture?type=square"/>
+                        <img class="avatar" style="float:left"
+                             src="//graph.facebook.com/{{ friend.facebook_id }}/picture?width=74&height=74"/>
 
-                        <h1 class="username">{{ friend.name }}</h1>
+                        <div style="float:left; margin-left:10px; width:116px">
+                            <span class="username">{{ friend.name }}</span>
+                            <br>
+                            <span class="friend_points" style="font-weight:500">100 pts</span>
+                        </div>
+                        <div style="clear:both"></div>
+                        <form action="{% url 'views.transaction' %}" method="get">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ friend.facebook_id }}" name="facebook_id"/>
+                            <input type="submit" value="Give"/>
+                        </form>
                     </div>
-                </div>
+                </li>
             {% endfor %}
-        </div>
+        </ul>
         <div class="center">
+            <form action="{% url 'views.search_results' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="search_term" placeholder="Search Users"/>
+                <input type="submit" value="GO"/>
+            </form>
             <div id="points">
                 {{ request.user.points }}
+            </div>
+            <div>
+                <div class="transaction" style="padding:20px">
+                    <img class="avatar" style="float:left; margin:10px;"
+                         src="//graph.facebook.com/{{ request.user.facebook_id }}/picture?width=74&height=74"/>
+
+                    <div style="padding:10px; font-size: 16pt">
+                        You gave <span class="friend_points">5 pts</span> to <span class="username">The Pony</span>
+                        <hr>
+                        <img style="padding: 10px" src="https://31.media.tumblr.com/fe845e1688adc444f3d4d91aec5fabf3/tumblr_inline_n1zkej5FN81sxv97z.jpg"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
             </div>
         </div>
         <div style="clear: both;"></div>
@@ -89,7 +105,4 @@
 {% endblock %}
 
 {% block extrascript %}
-    <script type="text/javascript">
-        var myObject = eval('({{ friends }})');
-    </script>
 {% endblock %}

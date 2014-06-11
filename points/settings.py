@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 FACEBOOK_APP_ID = '630834406963966'
 FACEBOOK_APP_SECRET = '169e943f0c5b9f670c6a92cd013152f8'
-FACEBOOK_DEFAULT_SCOPE = ['basic_info', 'email']
+FACEBOOK_DEFAULT_SCOPE = ['email']
 FACEBOOK_STORE_LIKES = True
 FACEBOOK_STORE_FRIENDS = True
 FACEBOOK_CELERY_STORE = True
@@ -27,8 +27,10 @@ FACEBOOK_CANVAS_PAGE = 'https://apps.facebook.com/goodpointstest'
 
 # Celery stuff
 BROKER_URL = 'redis://app22463601:jyS5FKra9PWXrYRh@pub-redis-16738.us-east-1-3.2.ec2.garantiadata.com:16738/0'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600,
-                            'max_connections': 5}  # 1 hour.  # TODO - Remove Redis connection limit
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600, # 1 hour.
+                            'max_connections': 3,       # TODO - Remove Redis connection limit
+                            }
+CELERY_REDIS_MAX_CONNECTIONS = 2
 
 RAVEN_CONFIG = {
     'dsn': 'https://237a31ed8b584f3abe8bab642f753e55:08f3ee7540c948819e8aa52344eb58b1@app.getsentry.com/19927',
@@ -148,6 +150,8 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if os.path.isfile(os.path.join(BASE_DIR, 'LOCAL')):
     from settings_local import *

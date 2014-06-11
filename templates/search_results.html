@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block extrastyle %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="container" style="height:100%; overflow: auto">
+    {% for user in users %}
+        <div>
+        <img class="avatar" src="//graph.facebook.com/{{ user.id }}/picture?width=74&height=74">
+        {{ user.name }}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

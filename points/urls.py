@@ -21,6 +21,8 @@ urlpatterns = patterns(
     # url(r'^blog/', include('blog.urls')),
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', 'points.views.home'),
+    url(r'^search/', 'points.views.search_results'),
+    url(r'^transaction/', 'points.views.transaction'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^facebook/', include('django_facebook.urls')),
     url(r'^accounts/', include('django_facebook.auth_urls')),

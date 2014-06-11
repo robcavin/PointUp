@@ -2,10 +2,32 @@
 <html>
 <head>
     <title>Good Points</title>
-    {% block extrastyle %}{%  endblock %}
+    <link href='//fonts.googleapis.com/css?family=Roboto:100,500' rel='stylesheet' type='text/css'>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 100;
+            color: #555555;
+            height: 100%;
+            margin: 0px;
+        }
+
+        .avatar {
+            width: 74px;
+            height: 74px;
+            border-radius: 37px;
+        }
+
+    </style>
+    {% block extrastyle %}{% endblock %}
 </head>
 <body>
 {% block content %}Hello world{% endblock %}
-{% block extrascript %}{%  endblock %}
+{% block extrascript %}{% endblock %}
 </body>
 </html>

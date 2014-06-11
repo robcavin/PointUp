@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block extrastyle %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'views.transaction' %}" method="post">
+    {{ form.as_p }}
+    </form>
+{% endblock %}
